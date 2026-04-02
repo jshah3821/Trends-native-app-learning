@@ -5,6 +5,8 @@ import {
   useSafeAreaInsets,
 } from 'react-native-safe-area-context';
 import SignUp from './auth/screens/SignUp';
+import Onboarding from './components/Onboarding';
+import Login from './Login';
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
@@ -19,11 +21,10 @@ function App() {
 
 function AppContent() {
   return (
-    <SafeAreaProvider>
-      <View style={styles.container}>
-        <SignUp />
-      </View>
-    </SafeAreaProvider>
+    <View style={styles.container}>
+      <Onboarding />
+      {/* <Login /> */}
+    </View>
   );
 }
 
@@ -34,3 +35,4 @@ const styles = StyleSheet.create({
 });
 
 export default App;
+
