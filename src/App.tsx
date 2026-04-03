@@ -20,8 +20,9 @@ function App() {
 function AppContent() {
   return (
     <View style={styles.container}>
-      <Onboarding />
+      {/* <Onboarding /> */}
       {/* <Login /> */}
+      <SignUp />
     </View>
   );
 }
@@ -33,4 +34,3 @@ const styles = StyleSheet.create({
 });
 
 export default App;
-
