@@ -10,7 +10,7 @@ const Onboarding = () => {
                 <Text style={styles.shopProductText}>Shop Product</Text>
 
                 <Text style={styles.innerText}>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc gravida interdum viverra
                 </Text>
 
                 <Image
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
         color: 'white',
         textAlign: 'center',
         marginTop: 10,
-        paddingHorizontal: 20,
+        paddingHorizontal: 10,
     },
     carouselImage: {
         height: 350,
@@ -54,7 +54,6 @@ const styles = StyleSheet.create({
         marginTop: 30,
     },
     bottom: {
-        paddingHorizontal: 20,
         marginBottom: 30,
     },
 });

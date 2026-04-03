@@ -1,12 +1,10 @@
 import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
 import {
   SafeAreaProvider,
-  SafeAreaView,
-  useSafeAreaInsets,
 } from 'react-native-safe-area-context';
 import SignUp from './auth/screens/SignUp';
 import Onboarding from './components/Onboarding';
-import Login from './Login';
+import Login from './components/Login';
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
