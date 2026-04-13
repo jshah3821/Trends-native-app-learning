@@ -1,4 +1,3 @@
-// import AsyncStorage from '@react-native-async-storage/async-storage';
 import { API_END_POINTS } from '../constants/apiEndPoints';
 import {
   CURRENT_MODE,
@@ -14,9 +13,6 @@ import { Platform, NativeModules } from 'react-native';
 import Toast from 'react-native-toast-message';
 import { moderateScale } from 'react-native-size-matters';
 import { isValidPhoneNumber } from 'libphonenumber-js';
-// import analytics from '@react-native-firebase/analytics';
-// import UserAgent from 'react-native-user-agent';
-// import { VolumeManager } from 'react-native-volume-manager';
 
 export const getColors = () => {
   if (CURRENT_MODE === DISPLAY_MODES.LIGHT_MODE) {
@@ -127,30 +123,6 @@ export const isValidHandleName = value => {
   const handleRegex = /^(?!.*@).+$/g;
   return handleRegex.test(value);
 };
-
-// export const deleteData = async key => {
-//   try {
-//     await AsyncStorage.removeItem(key);
-//   } catch (e) {}
-// };
-// export const setVolume = async value => {
-//   await VolumeManager.setVolume(value, {
-//     showUI: true,
-//   });
-// };
-
-// export const storeData = async (key, value) => {
-//   try {
-//     await AsyncStorage.setItem(key, value);
-//   } catch (e) {}
-// };
-
-// export const getData = async key => {
-//   try {
-//     const jsonValue = await AsyncStorage.getItem(key);
-//     return jsonValue != null ? jsonValue : null;
-//   } catch (e) {}
-// };
 
 export const generateVideoUrl = (userId, videoId) => {
   const urlToReturn =

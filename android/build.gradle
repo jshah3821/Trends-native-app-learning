@@ -19,3 +19,11 @@ buildscript {
 }
 
 apply plugin: "com.facebook.react.rootproject"
+
+configurations.all {
+    resolutionStrategy {
+        force "com.facebook.react:react-native:+" 
+        // If the error log specifically mentions a library like 'play-services-base', force it here:
+        // force 'com.google.android.gms:play-services-base:18.0.1'
+    }
+}

@@ -1,12 +1,27 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   TextInput,
   StyleSheet,
   Text,
   TouchableOpacity,
+  TextInputProps,
 } from 'react-native';
-import Ionicons from '@react-native-vector-icons/ionicons';
+import { moderateScale } from 'react-native-size-matters';
+import { EyeIconClose, EyeIconOpen } from '../assets/SVGs';
+
+type CustomInputProps = TextInputProps & {
+  label?: string;
+  name?: string;
+  value?: string;
+  onChangeText?: (...args: any[]) => void;
+  error?: string;
+  showError?: boolean;
+  required?: boolean;
+  wrapperStyle?: any;
+  inputContainerStyle?: any;
+  inputStyle?: any;
+};
 
 const CustomInput = ({
   label,
@@ -17,48 +32,63 @@ const CustomInput = ({
   showError,
   secureTextEntry = false,
   required,
-}: any) => {
+  wrapperStyle,
+  inputContainerStyle,
+  inputStyle,
+  placeholder,
+  autoCapitalize = 'sentences',
+  autoCorrect = false,
+  ...textInputProps
+}: CustomInputProps) => {
   const [hidden, setHidden] = useState(secureTextEntry);
 
+  useEffect(() => {
+    setHidden(secureTextEntry);
+  }, [secureTextEntry]);
+
+  const handleTextChange = (text: string) => {
+    if (!onChangeText) {
+      return;
+    }
+
+    if (name !== undefined && name !== null) {
+      onChangeText(name, text);
+      return;
+    }
+
+    onChangeText(text);
+  };
+
   return (
-    <View style={styles.wrapper}>
-      {label && (
-        <Text style={styles.label}>
-          {label}
-          {required && <Text style={styles.required}> *</Text>}
-        </Text>
-      )}
+    <View style={[styles.wrapper, wrapperStyle]}>
+      {label && <Text style={styles.label}>{label}</Text>}
 
       <View
         style={[
           styles.inputContainer,
+          inputContainerStyle,
           showError && error && styles.errorBorder,
         ]}
       >
         <TextInput
-          style={styles.input}
-          placeholder={label}
+          style={[styles.input, inputStyle]}
+          placeholder={placeholder ?? label}
           placeholderTextColor="#8A8A8A"
           value={value}
-          onChangeText={text => onChangeText(name, text)} // 🔥 important
+          onChangeText={handleTextChange}
           secureTextEntry={hidden}
+          autoCapitalize={autoCapitalize}
+          autoCorrect={autoCorrect}
+          {...textInputProps}
         />
 
         {secureTextEntry && (
           <TouchableOpacity onPress={() => setHidden((prev: any) => !prev)}>
-            <Text style={{ color: '#888' }}>
-              {/* {hidden ? '<' : '>'} */}
-              <Ionicons
-                name={hidden ? 'eye-off-outline' : 'eye-outline'}
-                size={16}
-                color={'white'}
-              />
-            </Text>
+            {hidden ? <EyeIconOpen /> : <EyeIconClose />}
           </TouchableOpacity>
         )}
       </View>
 
-      {/* Error */}
       {showError && error ? <Text style={styles.error}>{error}</Text> : null}
     </View>
   );
@@ -86,7 +116,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 12,
     backgroundColor: '#1C1C1E',
-    height: 50,
+    height: moderateScale(50),
   },
   input: {
     flex: 1,
